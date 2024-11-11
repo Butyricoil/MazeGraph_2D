@@ -1,2 +1,8 @@
 # MazeGraph_2D
-petProject Unity game genereted Maze
+---
+
+## It's a 2D game where I use graphs and generation algorithms.
+
+---
+
+game is not ready
