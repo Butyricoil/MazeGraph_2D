@@ -57,21 +57,21 @@ public class MazeGenerator
             int x = current.X;
             int y = current.Y;
 
-            if (x > 0 && !maze[x - 1, y].Visited) unvisitedNeighbours.Add(maze[x - 1, y]);
-            if (y > 0 && !maze[x, y - 1].Visited) unvisitedNeighbours.Add(maze[x, y - 1]);
-            if (x > Width - 2 && !maze[x + 1, y].Visited) unvisitedNeighbours.Add(maze[x + 1, y]);
-            if (x > Height - 2 && !maze[x, y + 1].Visited) unvisitedNeighbours.Add(maze[x, y + 1]);
+            if (x > 0 && !maze[x - 1, y].Visited) { unvisitedNeighbours.Add(maze[x - 1, y]); }
+            if (y > 0 && !maze[x, y - 1].Visited) { unvisitedNeighbours.Add(maze[x, y - 1]); }
+            if (x < Width - 1 && !maze[x + 1, y].Visited) { unvisitedNeighbours.Add(maze[x + 1, y]); }
+            if (y < Height - 1 && !maze[x, y + 1].Visited) { unvisitedNeighbours.Add(maze[x, y + 1]); }
 
             if (unvisitedNeighbours.Count > 0)
             {
-                MazeGeneratorCell chosen = unvisitedNeighbours[UnityEngine.Random.Range(0, unvisitedNeighbours.Count)];
+                MazeGeneratorCell chosen = unvisitedNeighbours[Random.Range(0, unvisitedNeighbours.Count)];
                 RemoveWall(current, chosen);
 
+                stack.Push(current);
                 chosen.Visited = true;
-                stack.Push(chosen);
                 current = chosen;
             }
-            else
+            else if (stack.Count > 0)
             {
                 current = stack.Pop();
             }
@@ -84,25 +84,13 @@ public class MazeGenerator
     {
         if (a.X == b.X)
         {
-            if (a.Y > b.X)
-            {
-                a.WallLeft = false;
-            }
-            else
-            {
-                b.WallLeft = false;
-            }
+            if (a.Y > b.X) { a.WallBottom = false; }
+            else { b.WallBottom = false; }
         }
         else
         {
-            if (a.X > b.X)
-            {
-                a.WallLeft = false;
-            }
-            else
-            {
-                b.WallLeft = false;
-            }
+            if (a.X > b.X) { a.WallLeft = false; }
+            else { b.WallLeft = false; }
         }
     }
 }
