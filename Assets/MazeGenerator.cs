@@ -1,9 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Random = UnityEngine.Random;
-
-
 public class MazeGeneratorCell
 {
     public int X;
@@ -11,18 +5,21 @@ public class MazeGeneratorCell
 
     public bool WallLeft = true;
     public bool WallBottom = true;
-
-    public bool Visited = false;
 }
-
 
 public class MazeGenerator
 {
     public int Width = 23;
     public int Height = 10;
 
-
     public MazeGeneratorCell[,] GenerateMaze()
+    {
+        MazeGeneratorCell[,] maze = InitializeMaze();
+        GenerateMazeWithBinaryTree(maze);
+        return maze;
+    }
+
+    private MazeGeneratorCell[,] InitializeMaze()
     {
         MazeGeneratorCell[,] maze = new MazeGeneratorCell[Width, Height];
 
@@ -32,102 +29,46 @@ public class MazeGenerator
             {
                 maze[x, y] = new MazeGeneratorCell
                 {
-                    X = x, Y = y
+                    X = x,
+                    Y = y
                 };
             }
         }
 
-        for (int x = 0; x < maze.GetLength(0); x++)
-        {
-            maze[x, Height - 1].WallLeft = false;
-        }
-
-        for (int y = 0; y < maze.GetLength(1); y++)
-        {
-            maze[Width - 1, y].WallBottom = false;
-        }
-
-        RemoveWallsWithBacktracker(maze);
-
         return maze;
     }
 
-
-    private void RemoveWallsWithBacktracker(MazeGeneratorCell[,] maze)
+    private void GenerateMazeWithBinaryTree(MazeGeneratorCell[,] maze)
     {
-        MazeGeneratorCell current = maze[0, 0];
-        current.Visited = true;
-
-        Stack<MazeGeneratorCell> stack = new Stack<MazeGeneratorCell>();
-
-        do
+        for (int x = 0; x < Width; x++)
         {
-            List<MazeGeneratorCell> unvisitedNeighbours = new List<MazeGeneratorCell>();
-
-            int x = current.X;
-            int y = current.Y;
-
-            if (x > 0 && !maze[x - 1, y].Visited)
+            for (int y = 0; y < Height; y++)
             {
-                unvisitedNeighbours.Add(maze[x - 1, y]);
-            }
+                MazeGeneratorCell current = maze[x, y];
 
-            if (y > 0 && !maze[x, y - 1].Visited)
-            {
-                unvisitedNeighbours.Add(maze[x, y - 1]);
-            }
+                var directions = new System.Collections.Generic.List<string>();
 
-            if (x < Width - 1 && !maze[x + 1, y].Visited)
-            {
-                unvisitedNeighbours.Add(maze[x + 1, y]);
-            }
+                if (x < Width - 1) directions.Add("Right");
+                if (y < Height - 1) directions.Add("Up");
 
-            if (y < Height - 1 && !maze[x, y + 1].Visited)
-            {
-                unvisitedNeighbours.Add(maze[x, y + 1]);
-            }
-
-            if (unvisitedNeighbours.Count > 0)
-            {
-                MazeGeneratorCell chosen = unvisitedNeighbours[Random.Range(0, unvisitedNeighbours.Count)];
-                RemoveWall(current, chosen);
-
-                stack.Push(current);
-                chosen.Visited = true;
-                current = chosen;
-            }
-            else if (stack.Count > 0)
-            {
-                current = stack.Pop();
+                if (directions.Count > 0)
+                {
+                    string direction = directions[UnityEngine.Random.Range(0, directions.Count)];
+                    RemoveWall(current, direction);
+                }
             }
         }
-        while (stack.Count > 0);
     }
 
-
-    private void RemoveWall(MazeGeneratorCell a, MazeGeneratorCell b)
+    private void RemoveWall(MazeGeneratorCell current, string direction)
     {
-        if (a.X == b.X)
+        if (direction == "Right")
         {
-            if (a.Y > b.Y)
-            {
-                a.WallBottom = false;
-            }
-            else
-            {
-                b.WallBottom = false;
-            }
+            current.WallLeft = false;
         }
-        else
+        else if (direction == "Up")
         {
-            if (a.X > b.X)
-            {
-                a.WallLeft = false;
-            }
-            else
-            {
-                b.WallLeft = false;
-            }
+            current.WallBottom = false;
         }
     }
 }
