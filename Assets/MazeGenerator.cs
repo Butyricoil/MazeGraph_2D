@@ -109,7 +109,7 @@ public class MazeGenerator
     {
         if (a.X == b.X)
         {
-            if (a.Y > b.X)
+            if (a.Y > b.Y)
             {
                 a.WallBottom = false;
             }
