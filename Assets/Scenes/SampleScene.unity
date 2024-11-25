@@ -250,7 +250,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11, y: 5, z: -10}
+  m_LocalPosition: {x: 11, y: -3.5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -376,7 +376,7 @@ Transform:
   m_GameObject: {fileID: 596900685}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.506, y: 1.537, z: 0}
+  m_LocalPosition: {x: 1.21, y: -7.03, z: 0}
   m_LocalScale: {x: 0.31797406, y: 0.31797406, z: 0.31797406}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -551,6 +551,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CellPrefab: {fileID: 7705810014567451322, guid: c22c3f8dde6bb594f85dc39740996bd0, type: 3}
+  Width: 22
+  Height: 9
+  CellSize: 1
 --- !u!1 &1523349451
 GameObject:
   m_ObjectHideFlags: 0
@@ -587,7 +590,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1523349452}
+  - {fileID: 1292105135}
   - {fileID: 519420032}
   - {fileID: 619394802}
-  - {fileID: 1292105135}
   - {fileID: 596900688}
