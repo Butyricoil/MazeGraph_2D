@@ -250,7 +250,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11, y: -3.5, z: -10}
+  m_LocalPosition: {x: 10.5, y: -3.5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -376,7 +376,7 @@ Transform:
   m_GameObject: {fileID: 596900685}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.21, y: -7.03, z: 0}
+  m_LocalPosition: {x: 1.497, y: -7.464, z: 0}
   m_LocalScale: {x: 0.31797406, y: 0.31797406, z: 0.31797406}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -551,7 +551,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CellPrefab: {fileID: 7705810014567451322, guid: c22c3f8dde6bb594f85dc39740996bd0, type: 3}
-  Width: 22
+  ExitPrefab: {fileID: 5844904633178400416, guid: 0d842aebdcac1e2419ff6d14ee3d4f83, type: 3}
+  Width: 21
   Height: 9
   CellSize: 1
 --- !u!1 &1523349451

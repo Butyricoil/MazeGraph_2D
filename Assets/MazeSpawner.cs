@@ -3,6 +3,7 @@ using UnityEngine;
 public class MazeSpawner : MonoBehaviour
 {
     public GameObject CellPrefab;
+    public GameObject ExitPrefab;
     public int Width = 1;
     public int Height = 1;
     public float CellSize = 1f;
@@ -22,6 +23,11 @@ public class MazeSpawner : MonoBehaviour
                 c.WallBottom.SetActive(maze[x, y].WallBottom);
                 c.WallRight.SetActive(maze[x, y].WallRight);
                 c.WallTop.SetActive(maze[x, y].WallTop);
+
+                if (maze[x, y].IsExit)
+                {
+                    Instantiate(ExitPrefab, position, Quaternion.identity);
+                }
             }
         }
     }

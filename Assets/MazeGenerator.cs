@@ -18,6 +18,7 @@ public class MazeGenerator
     {
         var maze = InitializeMaze();
         GenerateMazeWithBinaryTree(maze);
+        SetExit(maze);
         return maze;
     }
 
@@ -39,6 +40,11 @@ public class MazeGenerator
         return maze;
     }
 
+    private void SetExit(MazeGeneratorCell[,] maze)
+    {
+        maze[Width - 1, Height - 1].IsExit = true;
+    }
+
     private void GenerateMazeWithBinaryTree(MazeGeneratorCell[,] maze)
     {
         var random = new System.Random();
@@ -50,8 +56,8 @@ public class MazeGenerator
                 var current = maze[x, y];
                 var directions = new List<string>();
 
-                if (x < Width - 1) directions.Add("Right");
-                if (y < Height - 1) directions.Add("Down");
+                if (x < Width - 1) {directions.Add("Right");}
+                if (y < Height - 1) {directions.Add("Down");}
 
                 if (directions.Count > 0)
                 {
@@ -87,4 +93,5 @@ public class MazeGeneratorCell
     public bool WallBottom { get; set; } = true;
     public bool WallLeft { get; set; } = true;
     public bool WallTop { get; set; } = true;
+    public bool IsExit { get; set; } = false;
 }
