@@ -24,10 +24,13 @@ public class MazeSpawner : MonoBehaviour
                 c.WallRight.SetActive(maze[x, y].WallRight);
                 c.WallTop.SetActive(maze[x, y].WallTop);
 
+
                 if (maze[x, y].IsExit)
                 {
-                    Instantiate(ExitPrefab, position, Quaternion.identity);
+                    Vector2 exitPosition = new Vector2(x * CellSize, -y * CellSize);
+                    Instantiate(ExitPrefab, exitPosition, Quaternion.identity);
                 }
+
             }
         }
     }

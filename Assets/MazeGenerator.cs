@@ -3,6 +3,17 @@ using UnityEngine;
 using System.Collections.Generic;
 
 
+public class MazeGeneratorCell
+{
+    public int X { get; set; }
+    public int Y { get; set; }
+    public bool WallRight { get; set; } = true;
+    public bool WallBottom { get; set; } = true;
+    public bool WallLeft { get; set; } = true;
+    public bool WallTop { get; set; } = true;
+    public bool IsExit { get; set; } = false;
+}
+
 public class MazeGenerator
 {
     public int Width { get; private set; }
@@ -40,10 +51,41 @@ public class MazeGenerator
         return maze;
     }
 
-    private void SetExit(MazeGeneratorCell[,] maze)
+
+private void SetExit(MazeGeneratorCell[,] maze)
+{
+    var random = new System.Random();
+
+    int edge = random.Next(4); // 0 = верх, 1 = низ, 2 = лево, 3 = право
+    int x = 0, y = 0;
+
+    switch (edge)
     {
-        maze[Width - 1, Height - 1].IsExit = true;
+        case 0:
+            x = random.Next(Width);
+            y = 0;
+            maze[x, y].WallTop = false;
+            break;
+        case 1:
+            x = random.Next(Width);
+            y = Height - 1;
+            maze[x, y].WallBottom = false;
+            break;
+        case 2:
+            x = 0;
+            y = random.Next(Height);
+            maze[x, y].WallLeft = false;
+            break;
+        case 3:
+            x = Width - 1;
+            y = random.Next(Height);
+            maze[x, y].WallRight = false;
+            break;
     }
+
+    maze[x, y].IsExit = true;
+}
+
 
     private void GenerateMazeWithBinaryTree(MazeGeneratorCell[,] maze)
     {
@@ -83,15 +125,4 @@ public class MazeGenerator
                 break;
         }
     }
-}
-
-public class MazeGeneratorCell
-{
-    public int X { get; set; }
-    public int Y { get; set; }
-    public bool WallRight { get; set; } = true;
-    public bool WallBottom { get; set; } = true;
-    public bool WallLeft { get; set; } = true;
-    public bool WallTop { get; set; } = true;
-    public bool IsExit { get; set; } = false;
 }

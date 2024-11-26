@@ -551,7 +551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CellPrefab: {fileID: 7705810014567451322, guid: c22c3f8dde6bb594f85dc39740996bd0, type: 3}
-  ExitPrefab: {fileID: 5844904633178400416, guid: 0d842aebdcac1e2419ff6d14ee3d4f83, type: 3}
+  ExitPrefab: {fileID: 261432734125629211, guid: 0d842aebdcac1e2419ff6d14ee3d4f83, type: 3}
   Width: 21
   Height: 9
   CellSize: 1
